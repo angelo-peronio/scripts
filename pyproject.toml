@@ -1,0 +1,30 @@
+[project]
+name = "scripts"
+description = "PowerShell scripts to streamline common tasks in Python projects"
+authors = [{ name = "Angelo Peronio" }]
+license = "MIT"
+keywords = ["Python", "PowerShell"]
+dynamic = ["version"]
+readme = "README.md"
+requires-python = ">= 3.9"
+
+[dependency-groups]
+dev = ["bump-my-version", { include-group = "pre-commit" }]
+pre-commit = ["pre-commit", "pre-commit-uv"]
+
+[project.urls]
+Repository = "https://github.com/angelo-peronio/scripts"
+Issues = "https://github.com/angelo-peronio/scripts/issues"
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.bumpversion]
+tag = true
+tag_name = "v{new_version}"
+tag_message = "Version v{new_version}"
+commit = true
