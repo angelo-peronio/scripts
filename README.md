@@ -18,7 +18,7 @@ PS> Get-Help .\scripts\Release-Package.ps1 -Detailed
 Other common ways to reach the same goal:
 
 * [just](https://just.systems/)
-* [invoke](https://www.pyinvoke.org/)
-* [doit](https://pydoit.org/)
 * [nox](https://nox.thea.codes/en/stable/cookbook.html)
 * [make](https://www.gnu.org/software/make/)
+* [invoke](https://www.pyinvoke.org/)
+* [doit](https://pydoit.org/)
