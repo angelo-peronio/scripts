@@ -33,10 +33,13 @@ param (
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-$ProjectRootFolder = Join-Path $PSScriptRoot $ProjectRootFolder | Resolve-Path
-"Project root folder: $ProjectRootFolder" | Write-Host
+Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
-# As of uv 0.8.15, `uv sync` does not support an `--env-file` option like `uv run`,
-# so we have to
-&$PSScriptRoot\utils\Import-EnvFile.ps1
-uv sync --upgrade --directory=$ProjectRootFolder
+$ProjectRootFolder = Get-ProjectRootFolder
+"Project root folder: $ProjectRootFolder" | Write-Host
+$EnvFilePath = Get-EnvFilePath
+
+# As of uv 0.8.15, `uv sync` does not support an `--env-file` option like `uv run`
+# so we run `uv sync` through `uv run`.
+# Trick from https://github.com/astral-sh/uv/issues/8862#issuecomment-2474164670
+uv run --env-file=$EnvFilePath -- uv sync --upgrade --directory=$ProjectRootFolder
