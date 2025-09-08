@@ -24,25 +24,19 @@
 #>
 
 param (
-    # Place the environemnt environemnt outside the project folder,
-    # inside -VenvsRootFolder.
-    [switch]$OutsideProjectFolder = $false,
-    # Folder containing the enviroments created with -OutsideProjectFolder.
-    [string]$VenvsRootFolder = "C:\venvs",
     # Location of the project root folder relative to the folder containing this script.
     # Common values are ".", "..", or "..\..".
-    [string]$ProjectRoot = "..\.."
+    [string]$ProjectRootFolder = ".."
 )
 
 #Requires -Version 7.4
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-$ProjectRoot = Join-Path $PSScriptRoot $ProjectRoot | Resolve-Path
-"Project root folder: $ProjectRoot" | Write-Host
-$ProjectName = Split-Path $ProjectRoot -Leaf
-if ($OutsideProjectFolder) {
-    $Env:UV_PROJECT_ENVIRONMENT = Join-Path $VenvsRootFolder $ProjectName
-}
+$ProjectRootFolder = Join-Path $PSScriptRoot $ProjectRootFolder | Resolve-Path
+"Project root folder: $ProjectRootFolder" | Write-Host
 
-uv sync --upgrade --directory=$ProjectRoot
+# As of uv 0.8.15, `uv sync` does not support an `--env-file` option like `uv run`,
+# so we have to
+&$PSScriptRoot\utils\Import-EnvFile.ps1
+uv sync --upgrade --directory=$ProjectRootFolder

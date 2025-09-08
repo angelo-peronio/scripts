@@ -20,8 +20,12 @@ Issues = "https://github.com/angelo-peronio/scripts/issues"
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
-[tool.hatch.version]
-source = "vcs"
+[tool.hatch]
+build.targets.sdist.exclude = ["/.**", "development.md"]
+# `scripts` has no Python code to be packaged in the wheel.
+# We include something nonetheless, otherwise hatchling cries.
+build.targets.wheel.only-include = ["README.md"]
+version.source = "vcs"
 
 [tool.bumpversion]
 tag = true

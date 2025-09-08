@@ -7,6 +7,4 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
-.\.venv\Scripts\activate.ps1
-pre-commit install --install-hooks --overwrite
-deactivate
+uv run --env-file=.env pre-commit install --install-hooks --overwrite
