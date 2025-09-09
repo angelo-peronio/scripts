@@ -52,12 +52,13 @@ function Get-UvEnvFileOption {
 
         .OUTPUTS
         If an `.env` file is found inside the project root folder returns
-        "--env-file=<path to the .env file>", otherwise returns ans empty string.
+        "--env-file=<path to the .env file>", otherwise returns nothing.
     #>
 
     $EnvFilePath = Get-EnvFilePath
-    $Result = (Test-Path $EnvFilePath -PathType Leaf) ? "--env-file=$EnvFilePath" : ""
-    $Result | Write-Output
+    if (Test-Path $EnvFilePath -PathType Leaf) {
+        "--env-file=$EnvFilePath" | Write-Output
+    }
 }
 
 
@@ -75,7 +76,7 @@ function Get-UvRunOptions {
 
     @(
         "--directory=$(Get-ProjectRootFolder)",
-        "$(Get-UvEnvFileOption)",
+        $(Get-UvEnvFileOption),
         "--"
     ) | Write-Output
 }
