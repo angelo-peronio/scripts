@@ -2,7 +2,8 @@
 
 ## Next steps
 
+* Document submodule workflow <https://gist.github.com/ZhuoyunZhong/2c08c8549616e03b7f508fea64130558>
 * Release
-* README
-    * Setup (copy, checkout one file, submodule)
-* CI: run some scripts
+* CI
+    * Bootstrap
+    * Release dry run
