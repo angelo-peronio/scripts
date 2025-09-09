@@ -9,12 +9,14 @@
 #Requires -Version 7.4
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
-$ProjectRootFolder = (Get-Item $PSScriptRoot).Parent.FullName
-
-Push-Location $ProjectRootFolder
+Get-ProjectRootFolder | Push-Location
+# Remove previous build artifacts.
 if (Test-Path dist) { Remove-Item -Recurse -Force dist }
+# Build
 uv build
+# Expand sdist and wheel.
 Push-Location dist
 Get-Item *.tar.gz | ForEach-Object { tar -xvzf $_ }
 Get-Item *.whl | Expand-Archive -Verbose

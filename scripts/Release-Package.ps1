@@ -17,12 +17,14 @@ Param (
     # What version component to bump, either "major", "minor", or "patch".
     [Parameter(Mandatory, HelpMessage = "What version component to bump.")]
     [ValidateSet("major", "minor", "patch")]
-    [string]$Bump
+    [string]$Bump,
+    [switch]$DryRun
 )
 
 #Requires -Version 7.4
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
+Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
 git fetch --all --tags
 
@@ -39,10 +41,9 @@ if (-Not $UpToDate) {
     throw "Local repository is not up-to-date. Run git pull. Quitting."
 }
 
-$ProjectRootFolder = (Get-Item $PSScriptRoot).Parent.FullName
-$ProjectName = Split-Path $ProjectRootFolder -Leaf
-&"C:\venvs\$ProjectName\Scripts\activate.ps1"
-bump-my-version bump $Bump --verbose
-deactivate
+$DryRunOption = ($DryRun) ? "--dry-run" : ""
+uv run $(Get-UvRunOptions) bump-my-version bump $Bump --verbose $DryRunOption
 
-git push --follow-tags
+if (-not ($DryRun)) {
+    git push --follow-tags
+}
