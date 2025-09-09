@@ -3,7 +3,7 @@
     Bump version, tag a release and push to origin.
 
     .DESCRIPTION
-    Bump the project version, tag a release and push to remotes/origin.
+    Bump the project version, tag a release, and push to remotes/origin.
     A CI pipeline will then build, test, and release.
 
     .EXAMPLE

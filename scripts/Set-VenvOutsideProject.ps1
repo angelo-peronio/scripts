@@ -4,8 +4,8 @@
 
     .DESCRIPTION
     Write an .env file inside the project root folder with an environment variable
-    that tells `uv` to store the Python virtual environment outside the project folder,
-    inside the $VenvsRootFolder defined below.
+    that tells `uv` to store the Python virtual environment under the $VenvsRootFolder
+    defined below.
     Placing the environment outside the project folder avoids synchronization issues
     with Microsoft OneDrive, e.g. <https://github.com/astral-sh/uv/issues/7906>.
     Errors if the .env file already exists.

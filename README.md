@@ -9,7 +9,7 @@ A collection of PowerShell scripts to streamline common tasks during the develop
 ## Usage
 
 * Clone this project and copy the [`scripts`](scripts) subfolder into your project.
-* Customize the scripts as needed.
+* Customize the scripts as needed, and add your own.
 * Create or edit the [`pyproject.toml`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/) of your project:
     * Use the [`requires-python`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#python-requires) entry to specify the Python version you want to use.
     * List the dependencies of the tools you use in the `dev` [dependency group](https://packaging.python.org/en/latest/specifications/dependency-groups/).
@@ -22,7 +22,7 @@ A collection of PowerShell scripts to streamline common tasks during the develop
 * [`New-PythonVenv.ps1`](scripts/New-PythonVenv.ps1) Create or refresh a Python virtual environment.
 * [`Install-PreCommitHooks.ps1`](scripts/Install-PreCommitHooks.ps1) Install [pre-commit](https://pre-commit.com/) hooks.
 * [`Build-Package.ps1`](scripts/Build-Package.ps1) Build source distribution and wheel, then expand them for inspection.
-* [`Release-Project.ps1`](scripts/Release-Project.ps1) Bump the project version, tag a release and push to `origin`.
+* [`Release-Project.ps1`](scripts/Release-Project.ps1) Bump the project version, tag a release, and push to `origin`.
 * [`Set-VenvOutsideProject.ps1`](scripts/Set-VenvOutsideProject.ps1) Tell [`uv`](https://docs.astral.sh/uv) to store the Python virtual environment outside the project folder. Useful to avoid [problems](https://github.com/astral-sh/uv/issues/7906) with Microsoft OneDrive.
 
 ## Documentation
