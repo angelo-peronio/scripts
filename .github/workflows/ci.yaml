@@ -38,7 +38,7 @@ jobs:
         run: ./scripts/Bootstrap.ps1
 
       - name: Dry run Release-Project.ps1
-        # Release-Project fails if not eun from the master branch.
+        # Release-Project fails if not run from the master branch.
         if: (github.ref == 'refs/heads/master')
         shell: pwsh
         run: ./scripts/Release-Project.ps1 -Bump patch -DryRun

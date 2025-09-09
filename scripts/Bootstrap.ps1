@@ -8,4 +8,4 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
 &"$PSScriptRoot\New-PythonVenv.ps1"
-&"$PSScriptRoot\Install-PreCommit.ps1"
+&"$PSScriptRoot\Install-PreCommitHooks.ps1"
