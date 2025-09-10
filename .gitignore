@@ -1,5 +1,4 @@
-# Ignore uv.lock, since we are doing `uv sync --upgrade`
-# to always use the latest version of the dependencies.
+# Ignore uv.lock, since we want to always use the latest version of the dependencies.
 uv.lock
 
 # Byte-compiled / optimized / DLL files
