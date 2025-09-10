@@ -37,6 +37,13 @@ jobs:
         shell: pwsh
         run: ./scripts/Bootstrap.ps1
 
+      - name: Run Build-Package.ps1
+        # This runs because if the build backend is not specified in pyproject.toml,
+        # it defaults to setuptools.build_meta.
+        # The resulting sdist and wheel are almost empty.
+        shell: pwsh
+        run: ./scripts/Build-Package.ps1
+
       - name: Dry run Release-Project.ps1
         # Release-Project fails if not run from the master branch.
         if: (github.ref == 'refs/heads/master')
