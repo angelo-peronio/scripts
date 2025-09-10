@@ -4,7 +4,7 @@
 [![ci](https://github.com/angelo-peronio/scripts/actions/workflows/ci.yaml/badge.svg)](https://github.com/angelo-peronio/scripts/actions/workflows/ci.yaml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/angelo-peronio/scripts/master.svg)](https://results.pre-commit.ci/latest/github/angelo-peronio/scripts/master)
 
-A collection of PowerShell scripts to streamline common tasks during the development of projects written in Python or using tools written in Python ([pre-commit](https://pre-commit.com/), [Bump My Version](https://callowayproject.github.io/bump-my-version/), [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), …). Requires [`uv`](https://docs.astral.sh/uv).
+A collection of PowerShell scripts to streamline common tasks during the development of projects written in Python or using tools written in Python ([pre-commit](https://pre-commit.com/), [Bump My Version](https://callowayproject.github.io/bump-my-version/), [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), …), inspired by [Scripts to Rule Them All](https://github.blog/engineering/scripts-to-rule-them-all/). Requires [`uv`](https://docs.astral.sh/uv).
 
 ## Usage
 
