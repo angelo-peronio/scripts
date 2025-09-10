@@ -9,7 +9,7 @@ A collection of PowerShell scripts to streamline common tasks during the develop
 ## Usage
 
 * Clone this project and copy the [`scripts`](scripts) subfolder into your project.
-* Customize the scripts as needed, and add your own.
+* Customize the scripts as you like, add your own, and delete what you do not need.
 * Create or edit the [`pyproject.toml`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/) of your project:
     * Use the [`requires-python`](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#python-requires) entry to specify the Python version you want to use.
     * List the dependencies of the tools you use in the `dev` [dependency group](https://packaging.python.org/en/latest/specifications/dependency-groups/).
@@ -32,6 +32,11 @@ Use `Get-Help` to show the documentation of each script:
 ```powershell
 PS> Get-Help .\scripts\Release-Project.ps1 -Detailed
 ```
+
+## Details
+
+* Uses [`uv sync --upgrade`](https://docs.astral.sh/uv/reference/cli/#uv-sync--upgrade) to create the Python virtual environment, [`uv run`](https://docs.astral.sh/uv/reference/cli/#uv-run) to activate it.
+* Automatically loads the environment variables stored in a `.env` file in the project root folder, if present. This mechanism is used to optionally store the virtual environment outside the project folder, until `uv` will [support](https://github.com/astral-sh/uv/issues/1495) this natively.
 
 ## Alternatives
 
