@@ -3,12 +3,23 @@ function Get-ProjectRootFolder {
         .SYNOPSIS
         Get the path of the root folder of the project
 
+        .DESCRIPTION
+        Looks for the first parent folder containing a `pyproject.toml` file.
+
         .OUTPUTS
         A string with the path of the root folder of the project.
     #>
 
-    (Get-Item $PSScriptRoot).Parent.FullName
-    | Write-Output
+    $Folder = $PSScriptRoot
+    while ($Folder -ne "") {
+        $Folder = Split-Path $Folder -Parent
+        $PyprojectPath = Join-Path $Folder "pyproject.toml"
+        if (Test-Path $PyprojectPath -PathType Leaf) {
+            $Folder | Write-Output
+        }
+    }
+    throw "Cannot determine the project root folder. " `
+        + "`pyproject.toml` not found in any parent folder of $PSScriptRoot"
 }
 
 
