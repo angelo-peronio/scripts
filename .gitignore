@@ -1,4 +1,4 @@
-# Ignore uv.lock, since we want to always use the latest version of the dependencies.
+# Ignore the lockfile, since we want to always use the latest version of the dependencies.
 uv.lock
 
 # Byte-compiled / optimized / DLL files
