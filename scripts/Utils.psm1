@@ -15,7 +15,7 @@ function Get-ProjectRootFolder {
         $Folder = Split-Path $Folder -Parent
         $PyprojectPath = Join-Path $Folder "pyproject.toml"
         if (Test-Path $PyprojectPath -PathType Leaf) {
-            $Folder | Write-Output
+            return $Folder
         }
     }
     throw "Cannot determine the project root folder. " `
