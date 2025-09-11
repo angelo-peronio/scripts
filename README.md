@@ -35,7 +35,7 @@ PS> Get-Help .\scripts\Release-Project.ps1 -Detailed
 
 ## Details
 
-* The Python virtual environment is created with [`uv sync --upgrade`](https://docs.astral.sh/uv/reference/cli/#uv-sync--upgrade), always using the latest version of the dependencies. This prioritizes keeping the dependencies up to date over having a reproducible dependency set. Therefore, it makes sense to exclude the [lockfile](https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile) `uv.lock` from version control.
+* The Python virtual environment is created with [`uv sync --upgrade`](https://docs.astral.sh/uv/reference/cli/#uv-sync--upgrade), to get the latest version of the dependencies. [`uv run`] is used to activate it.
 * Environment variables are automatically loaded from a `.env` file in the project root folder, if present. This mechanism is used to optionally store the virtual environment outside the project folder, until `uv` will [support](https://github.com/astral-sh/uv/issues/1495) this natively.
 
 ## Alternatives
