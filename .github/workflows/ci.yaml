@@ -57,26 +57,29 @@ jobs:
     name: Package
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      package_name: ${{ steps.get-package-name.outputs.package_name }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v5
         with:
           persist-credentials: false
 
-      - name: Create archive
-        id: create-archive
+      - name: Get package name
+        id: get-package-name
         run: |
           version=$(git describe --always)
-          echo "Packaging scripts version $version"
-          archive_name="scripts-$version.zip"
-          echo "archive_name=$archive_name" >> $GITHUB_OUTPUT
-          zip -rv "$archive_name" scripts LICENSE README.md
+          package_name="scripts-$version"
+          echo "package_name=$package_name" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: archive
-          path: ${{ steps.create-archive.outputs.archive_name }}
+          name: ${{ steps.get-package-name.outputs.package_name }}
+          path: |
+            scripts
+            LICENSE
+            README.md
           compression-level: 0
 
   github-release:
@@ -91,7 +94,7 @@ jobs:
       - name: Download the archive
         uses: actions/download-artifact@v5
         with:
-          name: archive
+          name: ${{ needs.package.outputs.package_name }}
           path: release/
 
       - name: Create GitHub Release
