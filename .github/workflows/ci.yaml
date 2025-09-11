@@ -49,3 +49,28 @@ jobs:
         if: (github.ref == 'refs/heads/master')
         shell: pwsh
         run: ./scripts/Release-Project.ps1 -Bump patch -DryRun
+
+  package:
+    name: Package
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Create archive
+        id: create-archive
+        run: |
+          version=$(git describe --always)
+          echo "Packaging scripts version $version"
+          archive_name="scripts-$version.zip"
+          echo "archive_name=$archive_name" >> $GITHUB_OUTPUT
+          zip -rv "$archive_name" scripts LICENSE README.md
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.create-archive.outputs.archive_name }}
+          path: ${{ steps.create-archive.outputs.archive_name }}
