@@ -33,6 +33,32 @@ Use `Get-Help` to show the documentation of each script:
 PS> Get-Help .\scripts\Release-Project.ps1 -Detailed
 ```
 
+## As a git submodule
+
+Instead of copying, you can include the `scripts` repository as a submodule of your project. On Windows, this can be achieved as follows:
+
+* Enable Windows Developer Mode to be able to create symbolic links without administrative rights.
+* Enable symbolic links in `git`:
+
+    ```pwsh
+    git config --global core.symlinks true
+    ```
+
+* From within your project, add `scripts` as a submodule, and create a symbolic link in the project folder.
+
+    ```pwsh
+    git submodule add https://github.com/angelo-peronio/scripts.git submodules/scripts
+    New-Item -ItemType SymbolicLink -Path scripts -Target .\submodules\scripts\scripts\
+    ```
+
+* Remember to clone your project with `git clone --recurse`
+* After cloning on Windows, the `scripts` symbolic link [will not work](https://stackoverflow.com/questions/5917249/git-symbolic-links-in-windows/59761201#comment136888044_59761201). Recreate it:
+
+    ```pwsh
+    Remove-Item scripts
+    git restore scripts
+    ```
+
 ## Details
 
 * The Python virtual environment is created with [`uv sync --upgrade`](https://docs.astral.sh/uv/reference/cli/#uv-sync--upgrade), to get the latest version of the dependencies. [`uv run`] is used to activate it.
