@@ -938,10 +938,6 @@ dev = [
     { name = "pre-commit" },
     { name = "pre-commit-uv" },
 ]
-pre-commit = [
-    { name = "pre-commit" },
-    { name = "pre-commit-uv" },
-]
 
 [package.metadata]
 
@@ -949,10 +945,6 @@ pre-commit = [
 dev = [
     { name = "bump-my-version" },
     { name = "mkdocs-material" },
-    { name = "pre-commit" },
-    { name = "pre-commit-uv" },
-]
-pre-commit = [
     { name = "pre-commit" },
     { name = "pre-commit-uv" },
 ]

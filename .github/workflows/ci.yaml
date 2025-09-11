@@ -51,8 +51,7 @@ jobs:
         # Bootstrap.ps1 could have modified the lockfile.
         # We stash it, since Release-Project needs a clean working copy.
         run: |
-          git stash push -m "Lockfile" -- uv.lock
-          ./scripts/Release-Project.ps1 -Bump patch -DryRun
+          ./scripts/Release-Project.ps1 -Bump patch -DryRun -AllowDirty
 
   package:
     name: Package
