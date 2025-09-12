@@ -48,8 +48,7 @@ jobs:
         # Release-Project fails if not run from the master branch.
         if: (github.ref == 'refs/heads/master')
         shell: pwsh
-        # Bootstrap.ps1 could have modified the lockfile.
-        # We stash it, since Release-Project needs a clean working copy.
+        # Bootstrap.ps1 could have modified the lockfile, so we -AllowDirty.
         run: |
           ./scripts/Release-Project.ps1 -Bump patch -DryRun -AllowDirty
 
@@ -72,7 +71,7 @@ jobs:
           package_name="scripts-$version"
           echo "package_name=$package_name" >> $GITHUB_OUTPUT
 
-      - name: Upload artifact
+      - name: Zip and upload the package
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.get-package-name.outputs.package_name }}
@@ -80,7 +79,6 @@ jobs:
             scripts
             LICENSE
             README.md
-          compression-level: 0
 
   github-release:
     name: GitHub release
@@ -91,25 +89,33 @@ jobs:
       contents: write
 
     steps:
-      - name: Download the archive
+      - name: Download the package
         uses: actions/download-artifact@v5
         with:
           name: ${{ needs.package.outputs.package_name }}
           path: release/
+
+      - name: Re-zip for release
+        # Work around https://github.com/actions/upload-artifact/issues/426
+        run: |
+          pushd release
+          zip -rv ../${{ needs.package.outputs.package_name }}.zip *
+          popd
 
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
           gh release create
-          '${{ github.ref_name }}'
-          --repo '${{ github.repository }}'
+          ${{ github.ref_name }}
+          --repo ${{ github.repository }}
           --notes ''
 
-      - name: Upload archive to GitHub Release
+      - name: Upload package to GitHub Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
           gh release upload
-          '${{ github.ref_name }}' release/*
-          --repo '${{ github.repository }}'
+          ${{ github.ref_name }}
+          ${{ needs.package.outputs.package_name }}.zip
+          --repo ${{ github.repository }}
