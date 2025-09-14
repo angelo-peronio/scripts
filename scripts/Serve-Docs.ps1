@@ -8,4 +8,4 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
-uv run $(Get-UvRunOptions) mkdocs serve --config-file=docs/mkdocs.yaml
+uv run $(Get-UvRunOptions) mkdocs serve --strict --config-file=docs/mkdocs.yaml

@@ -4,7 +4,7 @@
 
     .DESCRIPTION
     Write an .env file inside the project root folder with an environment variable
-    that tells `uv` to store the Python virtual environment under the $VenvsRootFolder
+    that tells `uv` to store the Python virtual environment under the $VenvRootFolder
     defined below.
     Placing the environment outside the project folder avoids synchronization issues
     with Microsoft OneDrive, e.g. <https://github.com/astral-sh/uv/issues/7906>.
@@ -14,14 +14,17 @@
     PS> .\scripts\Set-VenvOutsideProject.ps1
 #>
 
+Param (
+    # Where to put the Python virtual environment.
+    [string]$VenvRootFolder = "C:\venvs"
+)
+
 #Requires -Version 7.4
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
-$VenvsRootFolder = "C:\venvs"
-
-$VenvFolder = Join-Path $VenvsRootFolder $(Get-ProjectName)
+$VenvFolder = Join-Path $VenvRootFolder $(Get-ProjectName)
 # `uv` accepts only forward slashes as path separator.
 $Setting = "UV_PROJECT_ENVIRONMENT=$VenvFolder" -replace "\\", "/"
 $EnvFilePath = Get-EnvFilePath

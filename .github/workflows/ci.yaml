@@ -33,9 +33,17 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v6
 
+      - name: Run Set-VenvOutsideProject.ps1
+        shell: pwsh
+        run: ./scripts/Set-VenvOutsideProject.ps1 -VenvRootFolder /tmp
+
       - name: Run Bootstrap.ps1
         shell: pwsh
         run: ./scripts/Bootstrap.ps1
+
+      - name: Run Update-PreCommitHooks.ps1
+        shell: pwsh
+        run: ./scripts/Update-PreCommitHooks.ps1
 
       - name: Run Build-Package.ps1
         # This runs because if the build backend is not specified in pyproject.toml,
