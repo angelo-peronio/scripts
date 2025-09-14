@@ -81,11 +81,16 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Fetch tags
+        # checkout@v5 does not fetch tags when triggered by a tag push.
+        run: git fetch --tags
+
       - name: Get package name
         id: get-package-name
         run: |
           version=$(git describe --always)
           package_name="scripts-$version"
+          echo "Package name: $package_name"
           echo "package_name=$package_name" >> $GITHUB_OUTPUT
 
       - name: Zip and upload the package
