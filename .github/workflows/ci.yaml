@@ -45,6 +45,14 @@ jobs:
         shell: pwsh
         run: ./scripts/Update-PreCommitHooks.ps1
 
+      - name: Run Build-Docs.ps1
+        shell: pwsh
+        run: ./scripts/Build-Docs.ps1
+
+      - name: Run Build-Docs.ps1 -Offline
+        shell: pwsh
+        run: ./scripts/Build-Docs.ps1 -Offline
+
       - name: Run Build-Package.ps1
         # This runs because if the build backend is not specified in pyproject.toml,
         # it defaults to setuptools.build_meta.

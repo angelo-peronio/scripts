@@ -1,4 +1,13 @@
 site_name: My Docs
 site_url: https://mydomain.org/mydocs
+# All paths in this configuration file are relative to the folder containing it.
+# mkdocs_site_dir is defined in Build-Docs.ps1
+site_dir: !ENV [mkdocs_site_dir, ../build/docs]
 theme:
   name: material
+
+plugins:
+  - search
+  - offline:
+      # mkdocs_offline is defined in Build-Docs.ps1
+      enabled: !ENV [mkdocs_offline, false]
