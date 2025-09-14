@@ -35,8 +35,7 @@ replace = '''
 
 ## scripts {new_version} - {utcnow:%Y-%m-%d}
 
-[Download]https://github.com/angelo-peronio/scripts/releases/download/v{new_version}/scripts-v{new_version}.zip)
+[Download](https://github.com/angelo-peronio/scripts/releases/download/v{new_version}/scripts-v{new_version}.zip)
  · [GitHub release](https://github.com/angelo-peronio/scripts/releases/tag/v{new_version})
  · [source](https://github.com/angelo-peronio/scripts/tree/v{new_version})
-
 '''
