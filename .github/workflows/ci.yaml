@@ -79,6 +79,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           persist-credentials: false
+          fetch-tags: true
 
       - name: Get package name
         id: get-package-name
@@ -125,7 +126,7 @@ jobs:
           gh release create
           ${{ github.ref_name }}
           --repo ${{ github.repository }}
-          --notes ''
+          --notes '[Changelog](https://github.com/angelo-peronio/scripts/blob/${{ github.ref_name }}/CHANGELOG.md)'
 
       - name: Upload package to GitHub Release
         env:
