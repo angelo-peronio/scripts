@@ -105,6 +105,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # When triggered by tag push, checkout@v5 fetches the repository in a way that
+      # confuses `git describe`. We re-compute the package name.
+      release_package_name: scripts-${{ github.ref_name }}.zip
 
     steps:
       - name: Download the package
@@ -115,11 +119,9 @@ jobs:
 
       - name: Re-zip for release
         # Work around https://github.com/actions/upload-artifact/issues/426
-        # When triggered by tag push, checkout@v5 fetches the repository in a way that
-        # confuses `git describe`. We re-compute the package name.
         run: |
           pushd release
-          zip -rv ../scripts-${{ github.ref_name }}.zip *
+          zip -rv ../$release_package_name *
           popd
 
       - name: Create GitHub Release
@@ -129,7 +131,7 @@ jobs:
           gh release create
           ${{ github.ref_name }}
           --repo ${{ github.repository }}
-          --notes '[Changelog](https://github.com/angelo-peronio/scripts/blob/${{ github.ref_name }}/CHANGELOG.md)'
+          --notes '[Changelog](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)'
 
       - name: Upload package to GitHub Release
         env:
@@ -137,5 +139,5 @@ jobs:
         run: >-
           gh release upload
           ${{ github.ref_name }}
-          ${{ needs.package.outputs.package_name }}.zip
+          $release_package_name
           --repo ${{ github.repository }}
