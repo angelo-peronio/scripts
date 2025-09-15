@@ -65,8 +65,7 @@ jobs:
         if: (github.ref == 'refs/heads/master')
         shell: pwsh
         # Bootstrap.ps1 could have modified the lockfile, so we -AllowDirty.
-        run: |
-          ./scripts/Release-Project.ps1 -Bump patch -DryRun -AllowDirty
+        run: ./scripts/Release-Project.ps1 -Bump patch -DryRun -AllowDirty
 
   package:
     name: Package
@@ -131,7 +130,7 @@ jobs:
           gh release create
           ${{ github.ref_name }}
           --repo ${{ github.repository }}
-          --notes '[Changelog](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)'
+          --notes "[Changelog](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md)"
 
       - name: Upload package to GitHub Release
         env:
