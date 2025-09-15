@@ -80,7 +80,6 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-          fetch-tags: true
 
       - name: Get package name
         id: get-package-name
@@ -116,9 +115,11 @@ jobs:
 
       - name: Re-zip for release
         # Work around https://github.com/actions/upload-artifact/issues/426
+        # When triggered by tag push, checkout@v5 fetches the repository in a way that
+        # confuses `git describe`. We re-compute the package name.
         run: |
           pushd release
-          zip -rv ../${{ needs.package.outputs.package_name }}.zip *
+          zip -rv ../scripts-${{ github.ref_name }}.zip *
           popd
 
       - name: Create GitHub Release
