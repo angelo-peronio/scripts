@@ -80,8 +80,8 @@ Instead of copying, you can include the `scripts` repository as a submodule of y
 
 Other common ways to reach the same goal:
 
-* [just](https://just.systems/)
-* [nox](https://nox.thea.codes/en/stable/cookbook.html)
-* [make](https://www.gnu.org/software/make/)
-* [invoke](https://www.pyinvoke.org/)
+* [`just`](https://just.systems/)
+* [Nox](https://nox.thea.codes/en/stable/cookbook.html)
+* [Make](https://www.gnu.org/software/make/)
+* [Invoke](https://www.pyinvoke.org/)
 * [doit](https://pydoit.org/)
