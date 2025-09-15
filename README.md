@@ -19,13 +19,22 @@ A collection of PowerShell scripts to streamline common tasks during the develop
 
 ## Scripts
 
+### Initialization
+
 * [`Bootstrap.ps1`](scripts/Bootstrap.ps1) Bootstrap a development environment.
 * [`New-PythonVenv.ps1`](scripts/New-PythonVenv.ps1) Create or refresh a Python virtual environment.
 * [`Install-PreCommitHooks.ps1`](scripts/Install-PreCommitHooks.ps1) Install [pre-commit](https://pre-commit.com/) hooks.
 * [`Update-PreCommitHooks.ps1`](scripts/Update-PreCommitHooks.ps1) Update pre-commit hooks.
+* [`Set-VenvOutsideProject.ps1`](scripts/Set-VenvOutsideProject.ps1) Tell [`uv`](https://docs.astral.sh/uv) to store the Python virtual environment outside the project folder. Useful to avoid [problems](https://github.com/astral-sh/uv/issues/7906) with Microsoft OneDrive.
+
+### Publishing
+
 * [`Build-Package.ps1`](scripts/Build-Package.ps1) Build source distribution and wheel, then expand them for inspection.
 * [`Release-Project.ps1`](scripts/Release-Project.ps1) Bump the project version, tag a release, and push to `origin`.
-* [`Set-VenvOutsideProject.ps1`](scripts/Set-VenvOutsideProject.ps1) Tell [`uv`](https://docs.astral.sh/uv) to store the Python virtual environment outside the project folder. Useful to avoid [problems](https://github.com/astral-sh/uv/issues/7906) with Microsoft OneDrive.
+
+### Documentation
+
+* [`Build-Docs.ps1`](scripts/Build-Docs.ps1) Build the documentation.
 * [`Serve-Docs.ps1`](scripts/Serve-Docs.ps1) Start a live preview server to view the documentation while editing it.
 
 ## Documentation
