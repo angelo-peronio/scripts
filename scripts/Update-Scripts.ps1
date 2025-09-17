@@ -7,7 +7,7 @@
     Requires robocopy <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy>
 
     .EXAMPLE
-    PS> Update-Scripts.ps1 -DestinationFolder .\scripts\
+    PS> .\scripts\Update-Scripts.ps1 -DestinationFolder .\scripts\
 #>
 
 Param (
