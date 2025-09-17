@@ -15,9 +15,9 @@ Param (
     [string]$DestinationFolder = ".",
     # The version to update to, in the form <major>.<minor>.<patch>. Defaults to the latest version.
     [string]$Version = "latest",
-    # Add alsoe "new" scripts, not already present in the destination folder.
+    # Add also "new" scripts, not already present in the destination folder.
     [switch]$AddNew = $false,
-    # Remove "old" scripts from the destination folder, not presebt in the downloaded version.
+    # Remove "old" scripts from the destination folder, not present in the downloaded version.
     [switch]$RemoveOld = $false
 )
 
