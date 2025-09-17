@@ -1,29 +1,36 @@
 <#
     .SYNOPSIS
-    Update scripts.
+    Update the scripts.
 
     .DESCRIPTION
+    Upgrade (or downgrade) the scripts to the specified version.
+    Requires robocopy <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy>
 
     .EXAMPLE
+    PS> Update-Scripts.ps1 -DestinationFolder .\scripts\
 #>
 
 Param (
     # The folder containing the scripts. Deafults to the current working directory.
-    [string]$ScriptsFolder = ".",
-    # The versiopn to update to, in the form <major>.<minor>.<patch>. Defaults to the latest version.
+    [string]$DestinationFolder = ".",
+    # The version to update to, in the form <major>.<minor>.<patch>. Defaults to the latest version.
     [string]$Version = "latest",
-    # Download all scripts, not only those already present.
-    [switch]$All = $false
+    # Add alsoe "new" scripts, not already present in the destination folder.
+    [switch]$AddNew = $false,
+    # Remove "old" scripts from the destination folder, not presebt in the downloaded version.
+    [switch]$RemoveOld = $false
 )
 
 #Requires -Version 7.4
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-# Import-Module -Name "$PSScriptRoot\Utils.psm1"
+$ProgressPreference = "SilentlyContinue"
 
-$DownloadFolderName = "__update_scripts_cache"
-$ScriptsFolder_ = Join-Path $(Get-Location) $ScriptsFolder | Resolve-Path
-$DownloadFolder = Join-Path $ScriptsFolder_ $DownloadFolderName
+$OldScriptsFolder = $DestinationFolder
+New-Item -ItemType Directory -Force $OldScriptsFolder | Out-Null
+
+$DownloadFolderName = ".update-scripts-cache"
+$DownloadFolder = Join-Path $OldScriptsFolder $DownloadFolderName
 
 # Create cache folder.
 if (Test-Path $DownloadFolder) {
@@ -55,15 +62,17 @@ $DownloadPath = Join-Path $DownloadFolder $ReleaseFileName
 Invoke-WebRequest -Uri $ReleaseUrl -OutFile $DownloadPath
 Expand-Archive $DownloadPath -DestinationPath $DownloadFolder
 
+# Robocopy.
 $NewScriptsFolder = Join-Path $DownloadFolder "scripts"
-$NewScripts = Get-ChildItem $NewScriptsFolder
-foreach ($NewScript in $NewScripts) {
-    $OldScript = Join-Path $ScriptsFolder_ $NewScript.Name
-    if ($All -or (Test-Path $OldScript -PathType Leaf)) {
-        Copy-Item $NewScript $OldScript
-        "Updated $($NewScript.Name)" | Write-Host
-    }
+$AddNewOption = ($AddNew) ? $null : "/xl"
+$RemoveOldOption = ($RemoveOld) ? "/purge" : $null
+# robocopy has weird exit codes: exitCode <= 7 means success.
+$PSNativeCommandUseErrorActionPreference = $false
+robocopy $NewScriptsFolder $OldScriptsFolder $AddNewOption $RemoveOldOption /r:2 /w:1 /e /np /tee /ts /log:"$DownloadFolder\robocopy.log"
+if ($LASTEXITCODE -ge 8) {
+    throw "robocopy failed with error code $LASTEXITCODE"
 }
+$PSNativeCommandUseErrorActionPreference = $true
 
 # Clean up.
 Remove-Item $DownloadFolder -Recurse -Force
