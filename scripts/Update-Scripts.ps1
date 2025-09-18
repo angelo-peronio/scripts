@@ -3,7 +3,7 @@
     Update the scripts.
 
     .DESCRIPTION
-    Upgrade (or downgrade) the scripts to the specified version.
+    Upgrade (or downgrade) the scripts to the specified released version.
     Requires robocopy <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy>
 
     .EXAMPLE

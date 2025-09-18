@@ -4,7 +4,7 @@
 [![ci](https://github.com/angelo-peronio/scripts/actions/workflows/ci.yaml/badge.svg)](https://github.com/angelo-peronio/scripts/actions/workflows/ci.yaml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/angelo-peronio/scripts/master.svg)](https://results.pre-commit.ci/latest/github/angelo-peronio/scripts/master)
 
-A collection of PowerShell scripts to streamline common tasks during the development of projects written in Python or using tools written in Python ([pre-commit](https://pre-commit.com/), [Bump My Version](https://callowayproject.github.io/bump-my-version/), [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), …), inspired by [Scripts to Rule Them All](https://github.blog/engineering/scripts-to-rule-them-all/). Requires [`uv`](https://docs.astral.sh/uv).
+A collection of PowerShell scripts to streamline common tasks during the development of projects written in Python or using tools written in Python ([pre-commit](https://pre-commit.com/), [Bump My Version](https://callowayproject.github.io/bump-my-version/), [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/), …), inspired by [Scripts to Rule Them All](https://github.blog/engineering/scripts-to-rule-them-all/). Requires [`uv`](https://docs.astral.sh/uv) 0.8.18+.
 
 ## Usage
 
@@ -26,6 +26,7 @@ A collection of PowerShell scripts to streamline common tasks during the develop
 * [`Install-PreCommitHooks.ps1`](scripts/Install-PreCommitHooks.ps1) Install [pre-commit](https://pre-commit.com/) hooks.
 * [`Update-PreCommitHooks.ps1`](scripts/Update-PreCommitHooks.ps1) Update pre-commit hooks.
 * [`Set-VenvOutsideProject.ps1`](scripts/Set-VenvOutsideProject.ps1) Tell [`uv`](https://docs.astral.sh/uv) to store the Python virtual environment outside the project folder. Useful to avoid [problems](https://github.com/astral-sh/uv/issues/7906) with Microsoft OneDrive.
+* [`Update-Scripts.ps1`](scripts/Update-Scripts.ps1) Upgrade (or downgrade) the scripts to the specified released version. Requires [robocopy](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/robocopy).
 
 ### Publishing
 
