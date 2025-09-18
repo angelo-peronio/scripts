@@ -118,9 +118,10 @@ jobs:
 
       - name: Re-zip for release
         # Work around https://github.com/actions/upload-artifact/issues/426
+        # Use CR/LF line endings for more comfort under Windows.
         run: |
           pushd release
-          zip -rv ../$release_package_name *
+          zip --recurse-paths --to-crlf --verbose ../$release_package_name *
           popd
 
       - name: Create GitHub Release
