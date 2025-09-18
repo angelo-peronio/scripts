@@ -25,12 +25,12 @@ $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
 $VenvFolder = Join-Path $VenvRootFolder $(Get-ProjectName)
-# `uv` accepts only forward slashes as path separator.
-$Setting = "UV_PROJECT_ENVIRONMENT=$VenvFolder" -replace "\\", "/"
+# uv accepts here only forward slashes as path separator.
+$Setting = "UV_PROJECT_ENVIRONMENT=$VenvFolder".Replace("\", "/")
 $EnvFilePath = Get-EnvFilePath
 
 if (Test-Path $EnvFilePath -PathType Leaf) {
-    throw "$EnvFilePath exists already. Edit it by hand to include $Setting. Quitting."
+    throw "$EnvFilePath already exists. Edit it by hand to include $Setting. Quitting."
 }
 else {
     $Setting | Out-File $EnvFilePath
