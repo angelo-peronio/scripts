@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## scripts 0.1.1 - 2025-09-18
+
+[Download](https://github.com/angelo-peronio/scripts/releases/download/v0.1.1/scripts-v0.1.1.zip)
+ · [GitHub release](https://github.com/angelo-peronio/scripts/releases/tag/v0.1.1)
+ · [source](https://github.com/angelo-peronio/scripts/tree/v0.1.1)
+
 ### New features
 
 * [`Update-Scripts.ps1`](scripts/Update-Scripts.ps1) to download a release from GitHub.
