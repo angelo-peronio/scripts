@@ -4,7 +4,7 @@ description = "PowerShell scripts to streamline common tasks in Python projects"
 authors = [{ name = "Angelo Peronio" }]
 license = "MIT"
 keywords = ["Python", "PowerShell", "uv"]
-version = "0.1.1"
+version = "0.1.2"
 readme = "README.md"
 requires-python = ">= 3.13"
 

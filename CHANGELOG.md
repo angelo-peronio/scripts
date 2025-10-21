@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## scripts 0.1.2 - 2025-10-21
+
+[Download](https://github.com/angelo-peronio/scripts/releases/download/v0.1.2/scripts-v0.1.2.zip)
+ · [GitHub release](https://github.com/angelo-peronio/scripts/releases/tag/v0.1.2)
+ · [source](https://github.com/angelo-peronio/scripts/tree/v0.1.2)
+
 ### Enhancements
 
 * Call [`Update-PreCommitHooks.ps1`](scripts\Update-PreCommitHooks.ps1) during [bootstrap](scripts\Bootstrap.ps1).
