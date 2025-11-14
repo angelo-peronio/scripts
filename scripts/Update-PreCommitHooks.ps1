@@ -8,4 +8,4 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
-uv run $(Get-UvRunOptions) pre-commit autoupdate --jobs=4
+uv run $(Get-UvRunOptions) prek autoupdate --jobs=4

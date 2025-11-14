@@ -5,6 +5,7 @@
 ### Enhancements
 
 * Use `--clear` option of `uv build`.
+* Use [prek](https://prek.j178.dev/).
 
 ## scripts 0.1.2 - 2025-10-21
 

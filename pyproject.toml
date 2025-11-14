@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">= 3.13"
 
 [dependency-groups]
-dev = ["bump-my-version", "mkdocs-material", "pre-commit-uv"]
+dev = ["bump-my-version", "mkdocs-material", "prek"]
 
 # We do not define the [build-system] table, to tell uv
 # that this project has no Python package to be installed.
