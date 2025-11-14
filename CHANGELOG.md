@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## scripts 0.1.3 - 2025-11-14
+
+[Download](https://github.com/angelo-peronio/scripts/releases/download/v0.1.3/scripts-v0.1.3.zip)
+ · [GitHub release](https://github.com/angelo-peronio/scripts/releases/tag/v0.1.3)
+ · [source](https://github.com/angelo-peronio/scripts/tree/v0.1.3)
+
 ### Enhancements
 
 * Use `--clear` option of `uv build`.
