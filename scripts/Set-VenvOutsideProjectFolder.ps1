@@ -16,13 +16,11 @@ Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
 $SignalFilePath = Get-VenvSignalFilePath
 
-@"
-This file signals to the scripts that the Python virtual environment should be stored outside the project folder.
-
-You probably want to add the following line to your .gitignore file:
-
-/.venv-outside-project-folder
-"@
+"This file signals to the scripts that the Python virtual environment should be stored outside the project folder."
 | Out-File -FilePath $SignalFilePath -Encoding UTF8 -Force
 
-"Wrote signal file: $SignalFilePath" | Write-Host
+@"
+Wrote signal file: $SignalFilePath
+You probably want to add the following line to your .gitignore file:
+/.venv-outside-project-folder
+"@ | Write-Host
