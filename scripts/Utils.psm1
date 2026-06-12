@@ -41,21 +41,6 @@ function Get-ProjectName {
 }
 
 
-function Get-EnvFilePath {
-    <#
-        .SYNOPSIS
-        Get the path to the `.env` file inside the project root folder.
-
-        .OUTPUTS
-        A string.
-    #>
-
-    Get-ProjectRootFolder
-    | Join-Path -ChildPath ".env"
-    | Write-Output
-}
-
-
 function Get-VenvSignalFilePath {
     <#
         .SYNOPSIS
@@ -69,6 +54,7 @@ function Get-VenvSignalFilePath {
     | Join-Path -ChildPath ".venv-outside-project-folder"
     | Write-Output
 }
+
 
 function Set-UvEnvironmentVariables {
     <#
