@@ -46,7 +46,9 @@ if (-Not $UpToDate) {
 
 $DryRunOption = ($DryRun) ? "--dry-run" : $null
 $AllowDirtyOption = ($AllowDirty) ? "--allow-dirty" : $null
-uv run $(Get-UvRunOptions) bump-my-version bump $Bump $DryRunOption $AllowDirtyOption --verbose
+
+Set-UvEnvironmentVariables
+uv run bump-my-version bump $Bump $DryRunOption $AllowDirtyOption --verbose
 
 if (-not ($DryRun)) {
     git push --follow-tags

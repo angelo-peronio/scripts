@@ -56,28 +56,46 @@ function Get-EnvFilePath {
 }
 
 
-function Get-UvRunOptions {
+function Get-VenvSignalFilePath {
     <#
         .SYNOPSIS
-        Get the command line options we use to invoke `uv run`.
+        Get the path to the `.venv-outside-project-folder` signal file inside the project root folder.
 
         .OUTPUTS
-        An array of option strings.
-
-        .EXAMPLE
-        PS> uv run $(Get-UvRunOptions) ruff check
+        A string.
     #>
 
-    $EnvFilePath = Get-EnvFilePath
-    # uv implements custom escaping for the --env-file option, so
-    # we need to use / as path separator, and escape the whitespaces with \
-    # https://github.com/astral-sh/uv/issues/15806
-    # https://github.com/astral-sh/uv/pull/15815
-    $EnvFilePathEscaped = $EnvFilePath.Replace("\", "/").Replace(" ", "\ ")
-    $EnvFileOption = (Test-Path $EnvFilePath -PathType Leaf) ? "--env-file=$EnvFilePathEscaped" : $null
-    @(
-        "--directory=$(Get-ProjectRootFolder)",
-        $EnvFileOption,
-        "--"
-    ) | Write-Output
+    Get-ProjectRootFolder
+    | Join-Path -ChildPath ".venv-outside-project-folder"
+    | Write-Output
+}
+
+function Set-UvEnvironmentVariables {
+    <#
+        .SYNOPSIS
+        Set the uv environment variables for the current session.
+
+        .DESCRIPTION
+        Sets UV_WORKING_DIRECTORY to the project root folder, so that the scripts
+        can be run from anywhere.
+        If a file named `.venv-outside-project-folder` is found in the project root
+        folder, also sets UV_PROJECT_ENVIRONMENT to store the Python virtual environment
+        under the $VenvRootFolder defined below.
+        Placing the environment outside the project folder avoids synchronization issues
+        with Microsoft OneDrive, e.g. <https://github.com/astral-sh/uv/issues/7906>.
+
+        .EXAMPLE
+        PS> Set-UvEnvironmentVariables
+    #>
+
+    $VenvRootFolder = "C:\venvs"
+
+    $ProjectRootFolder = Get-ProjectRootFolder
+    $Env:UV_WORKING_DIRECTORY = $ProjectRootFolder
+
+    if (Test-Path $(Get-VenvSignalFilePath) -PathType Leaf) {
+        $VenvFolder = Join-Path $VenvRootFolder $(Get-ProjectName)
+        # uv accepts here only forward slashes as path separator.
+        $Env:UV_PROJECT_ENVIRONMENT = $VenvFolder.Replace("\", "/")
+    }
 }

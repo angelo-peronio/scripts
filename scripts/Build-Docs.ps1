@@ -18,4 +18,5 @@ Import-Module -Name "$PSScriptRoot\Utils.psm1"
 $Env:mkdocs_site_dir = $Offline ? "../build/offline-docs" : "../build/docs"
 $Env:mkdocs_offline = $Offline ? "true" : ""
 
-uv run $(Get-UvRunOptions) mkdocs build --config-file=docs/mkdocs.yaml --strict --verbose
+Set-UvEnvironmentVariables
+uv run mkdocs build --config-file=docs/mkdocs.yaml --strict --verbose

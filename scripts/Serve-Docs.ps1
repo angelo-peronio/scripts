@@ -8,5 +8,6 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
+Set-UvEnvironmentVariables
 # Explicit --livereload to work around https://github.com/mkdocs/mkdocs/issues/4032
-uv run $(Get-UvRunOptions) mkdocs serve --config-file=docs/mkdocs.yaml --livereload
+uv run mkdocs serve --config-file=docs/mkdocs.yaml --livereload
