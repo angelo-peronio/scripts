@@ -8,6 +8,9 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
+# Silence Material for MKDocs warning about MkDocs 2.
+$Env:NO_MKDOCS_2_WARNING = "true"
+
 Set-UvEnvironmentVariables
 # Explicit --livereload to work around https://github.com/mkdocs/mkdocs/issues/4032
 uv run mkdocs serve --config-file=docs/mkdocs.yaml --livereload

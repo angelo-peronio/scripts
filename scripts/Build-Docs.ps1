@@ -13,6 +13,9 @@ $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Import-Module -Name "$PSScriptRoot\Utils.psm1"
 
+# Silence Material for MKDocs warning about MkDocs 2.
+$Env:NO_MKDOCS_2_WARNING = "true"
+
 # Define the environemnt variables used in docs/mkdocs.yaml
 # The site_dir path is relative to the MkDocs config file docs/mkdocs.yaml
 $Env:mkdocs_site_dir = $Offline ? "../build/offline-docs" : "../build/docs"
