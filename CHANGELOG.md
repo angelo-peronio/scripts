@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## scripts 0.1.5 - 2026-06-18
+
+[Download](https://github.com/angelo-peronio/scripts/releases/download/v0.1.5/scripts-v0.1.5.zip)
+ · [GitHub release](https://github.com/angelo-peronio/scripts/releases/tag/v0.1.5)
+ · [source](https://github.com/angelo-peronio/scripts/tree/v0.1.5)
+
 ## scripts 0.1.4 - 2026-02-04
 
 [Download](https://github.com/angelo-peronio/scripts/releases/download/v0.1.4/scripts-v0.1.4.zip)
