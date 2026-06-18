@@ -26,16 +26,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Setup uv
-        uses: astral-sh/setup-uv@v8.0.0
+        uses: astral-sh/setup-uv@v8.2.0
 
-      - name: Run Set-VenvOutsideProject.ps1
+      - name: Run Set-VenvOutsideProjectFolder.ps1
         shell: pwsh
-        run: ./scripts/Set-VenvOutsideProject.ps1 -VenvRootFolder /tmp
+        run: ./scripts/Set-VenvOutsideProjectFolder.ps1 -VenvRootFolder /tmp
 
       - name: Run Bootstrap.ps1
         shell: pwsh
@@ -75,7 +75,7 @@ jobs:
       package_name: ${{ steps.get-package-name.outputs.package_name }}
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
